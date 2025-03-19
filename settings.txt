@@ -1,0 +1,8 @@
+{
+"Palvelin": "127.0.0.1",
+"Portti": 5432,
+"Käyttäjätunnus": "Villi",
+"Salasana": "Kissa123",
+"Tietokanta": "Autolainaus",
+"Skeema": "public"
+}
