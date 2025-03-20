@@ -5,17 +5,9 @@
 # ---------------------
 
 import json # Mahdollistaa json-muunnokset
+from cryptography import fernet # Symmetrinen salaustyökalu
 
 # Tiedoston käsittely: avaaminen ja sulkeminen
-
-"""
-Asetukset
-Palvelin: 127.0.0.1
-Portti: 5432
-Käyttäjätunnus: Villi
-Salasana: Kissa123
-Tietokanta: Autolainaus
-"""
 
 """
 # Avataan tiedosto lukua varten
@@ -52,8 +44,8 @@ with open('settings.txt', 'at') as settingsFile5:
 
 with open('settings.txt', 'rt') as settingsFile6:
     print(settingsFile6.read())
-
-
+"""
+"""
 asetuksetDict = {
     'server': 'autolaina.raseko.fi',
     'port': 5432,
@@ -70,3 +62,22 @@ with open('asetukset.json', 'wt') as settingsFile:
     settingsFile.write(asetuksetJson)
     print("Asetukset tallennettu")
 """
+
+# Luodaan oikean mittainen salausavain
+cipherKey = fernet.Fernet.generate_key()
+
+# Määritellään salausalgoritmi käyttämään luotua avainta
+cipher = fernet.Fernet(cipherKey)
+
+# Määritellään teksti tavuiksi (8 bit)
+plainPassword = b'Q2werty7'
+
+# Suoritetaan salaus
+encryptedPassword = cipher.encrypt(plainPassword)
+
+print('Salatussa muodossa:', encryptedPassword)
+
+# Puretaan salaus ja poistetaan byte code -merkintä merkkijonosta
+decryptedPassword = cipher.decrypt(encryptedPassword).decode()
+
+print('Salaus purettuna salasana on', decryptedPassword)
