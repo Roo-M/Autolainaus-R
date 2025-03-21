@@ -11,6 +11,8 @@ import json # JSON-muunnokset
 from PySide6 import QtWidgets # Qt-vimpaimet
 from saveSettings_ui import Ui_MainWindow # Käännetyn käyttöliittymän luokka
 
+import cipher # DIY moduuli salaukseen, käyttää Fernet-salausta
+
 # Määritellään luokka, joka perii QMainWindow- ja Ui_MainWindow-luokan
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     """A class for creating main window for the application"""
@@ -27,18 +29,29 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # Kutsutaan käyttöliittymän muodostusmetodia setupUi
         self.ui.setupUi(self)
 
-        # TODO: Tee tähän elementtien päivitys JSON-tiedoston pohjalta
+        # Salausavain luottamuksellisten asetusten kryptaamiseen
+        # Avainta ei saa vaihtaa ohjelman käyttöönoton jälkeen!
+        # Avain on luotu cipher.py
+        self.secretKey = b'NpCcppnJQeRysyr7hlqgaCSdYO5qvuaWU9ZzePqb53k='
+        self.cryptoEngine = cipher.createCipher(self.secretKey)
+
         # Luetaan asetustiedosto Python-sanakirjaksi
         self.currentSettings = {}
-        with open('settings.json', 'rt') as settingsFile:
-            jsonData = settingsFile.read()
-            self.currentSettings = json.loads(jsonData)
 
-        self.ui.serverLineEdit.setText(self.currentSettings['server'])
-        self.ui.portLineEdit.setText(self.currentSettings['port'])
-        self.ui.databaseLineEdit.setText(self.currentSettings['database'])
-        self.ui.userLineEdit.setText(self.currentSettings['userName'])
-        self.ui.passwordLineEdit.setText(self.currentSettings['password'])
+        # Tarkistetaan ensin, että asetustiedosto on olemassa
+        try:
+            with open('settings.json', 'rt') as settingsFile:
+                jsonData = settingsFile.read()
+                self.currentSettings = json.loads(jsonData)
+
+            self.ui.serverLineEdit.setText(self.currentSettings['server'])
+            self.ui.portLineEdit.setText(self.currentSettings['port'])
+            self.ui.databaseLineEdit.setText(self.currentSettings['database'])
+            self.ui.userLineEdit.setText(self.currentSettings['userName'])
+            self.ui.passwordLineEdit.setText(self.currentSettings['password'])
+        except Exception as e:
+            self.openWarning()
+        
 
         # OHJELMOIDUT SIGNAALIT
         # ---------------------
@@ -58,9 +71,12 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         port = self.ui.portLineEdit.text()
         database = self.ui.databaseLineEdit.text()
         userName = self.ui.userLineEdit.text()
-        password = self.ui.passwordLineEdit.text()
 
-        # TODO: Lisää tähän salasanan kryptaus
+        # Muutetaan merkkijono tavumuotoon (byte, merkistö UTF-8)
+        plainTextpassword = bytes(self.ui.passwordLineEdit.text(), 'utf-8')
+
+        # Salataan ja muunnetaan tavalliseksi merkkijonoksi, jotta JSON-tallennus onnistuu
+        encryptedPassword = str(cipher.encrypt(self.cryptoEngine, plainTextpassword))
 
         # Muodostetaan muuttujista Python-sanakirja
         settingsDictionary = {
@@ -68,7 +84,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             'port': port,
             'database': database,
             'userName': userName,
-            'password': password
+            'password': encryptedPassword
         }
 
         # Muunnetaan sanakirja JSON-muotoon
@@ -82,9 +98,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     # Avataan MessageBox
     def openWarning(self):
         msgBox = QtWidgets.QMessageBox()
-        msgBox.setIcon(QtWidgets.QMessageBox.Critical)
-        msgBox.setWindowTitle('Kauheaa!')
-        msgBox.setText('Jotain kamalaa tapahtui')
+        msgBox.setIcon(QtWidgets.QMessageBox.Warning)
+        msgBox.setWindowTitle('Puuttuvat asetukset')
+        msgBox.setText('Asetuksia ei ole tehty, syötä tietokannan asetukset')
         msgBox.setStandardButtons(QtWidgets.QMessageBox.Ok)
         msgBox.exec()
 

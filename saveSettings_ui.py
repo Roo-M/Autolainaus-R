@@ -33,13 +33,13 @@ class Ui_MainWindow(object):
         font = QFont()
         font.setPointSize(11)
         self.saveSettingsPushButton.setFont(font)
-        self.widget = QWidget(self.centralwidget)
-        self.widget.setObjectName(u"widget")
-        self.widget.setGeometry(QRect(12, 12, 225, 136))
-        self.formLayout = QFormLayout(self.widget)
+        self.layoutWidget = QWidget(self.centralwidget)
+        self.layoutWidget.setObjectName(u"layoutWidget")
+        self.layoutWidget.setGeometry(QRect(12, 12, 225, 136))
+        self.formLayout = QFormLayout(self.layoutWidget)
         self.formLayout.setObjectName(u"formLayout")
         self.formLayout.setContentsMargins(0, 0, 0, 0)
-        self.serverLabel = QLabel(self.widget)
+        self.serverLabel = QLabel(self.layoutWidget)
         self.serverLabel.setObjectName(u"serverLabel")
         font1 = QFont()
         font1.setPointSize(10)
@@ -47,57 +47,58 @@ class Ui_MainWindow(object):
 
         self.formLayout.setWidget(0, QFormLayout.LabelRole, self.serverLabel)
 
-        self.serverLineEdit = QLineEdit(self.widget)
+        self.serverLineEdit = QLineEdit(self.layoutWidget)
         self.serverLineEdit.setObjectName(u"serverLineEdit")
         self.serverLineEdit.setFont(font1)
 
         self.formLayout.setWidget(0, QFormLayout.FieldRole, self.serverLineEdit)
 
-        self.portLabel = QLabel(self.widget)
+        self.portLabel = QLabel(self.layoutWidget)
         self.portLabel.setObjectName(u"portLabel")
         self.portLabel.setFont(font1)
 
         self.formLayout.setWidget(1, QFormLayout.LabelRole, self.portLabel)
 
-        self.portLineEdit = QLineEdit(self.widget)
+        self.portLineEdit = QLineEdit(self.layoutWidget)
         self.portLineEdit.setObjectName(u"portLineEdit")
         self.portLineEdit.setFont(font1)
 
         self.formLayout.setWidget(1, QFormLayout.FieldRole, self.portLineEdit)
 
-        self.databaseLabel = QLabel(self.widget)
+        self.databaseLabel = QLabel(self.layoutWidget)
         self.databaseLabel.setObjectName(u"databaseLabel")
         self.databaseLabel.setFont(font1)
 
         self.formLayout.setWidget(2, QFormLayout.LabelRole, self.databaseLabel)
 
-        self.databaseLineEdit = QLineEdit(self.widget)
+        self.databaseLineEdit = QLineEdit(self.layoutWidget)
         self.databaseLineEdit.setObjectName(u"databaseLineEdit")
         self.databaseLineEdit.setFont(font1)
 
         self.formLayout.setWidget(2, QFormLayout.FieldRole, self.databaseLineEdit)
 
-        self.userLabel = QLabel(self.widget)
+        self.userLabel = QLabel(self.layoutWidget)
         self.userLabel.setObjectName(u"userLabel")
         self.userLabel.setFont(font1)
 
         self.formLayout.setWidget(3, QFormLayout.LabelRole, self.userLabel)
 
-        self.userLineEdit = QLineEdit(self.widget)
+        self.userLineEdit = QLineEdit(self.layoutWidget)
         self.userLineEdit.setObjectName(u"userLineEdit")
         self.userLineEdit.setFont(font1)
 
         self.formLayout.setWidget(3, QFormLayout.FieldRole, self.userLineEdit)
 
-        self.passwordLabel = QLabel(self.widget)
+        self.passwordLabel = QLabel(self.layoutWidget)
         self.passwordLabel.setObjectName(u"passwordLabel")
         self.passwordLabel.setFont(font1)
 
         self.formLayout.setWidget(4, QFormLayout.LabelRole, self.passwordLabel)
 
-        self.passwordLineEdit = QLineEdit(self.widget)
+        self.passwordLineEdit = QLineEdit(self.layoutWidget)
         self.passwordLineEdit.setObjectName(u"passwordLineEdit")
         self.passwordLineEdit.setFont(font1)
+        self.passwordLineEdit.setEchoMode(QLineEdit.Password)
 
         self.formLayout.setWidget(4, QFormLayout.FieldRole, self.passwordLineEdit)
 
