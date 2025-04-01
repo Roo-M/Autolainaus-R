@@ -2,6 +2,8 @@
 # ==============================================================
 
 # KIRJASTOJEN JA MODUULINE LATAUKSET
+# ----------------------------------
+
 from cryptography.fernet import Fernet
 
 def newKey() -> bytes:
