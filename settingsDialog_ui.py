@@ -30,6 +30,7 @@ class Ui_Dialog(object):
         font.setPointSize(10)
         font.setBold(True)
         self.saveSettingsPushButton.setFont(font)
+        self.saveSettingsPushButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.saveSettingsPushButton.setStyleSheet(u"background-color: rgb(0, 170, 255);\n"
 "color: rgb(255, 255, 255);")
         self.layoutWidget = QWidget(Dialog)
