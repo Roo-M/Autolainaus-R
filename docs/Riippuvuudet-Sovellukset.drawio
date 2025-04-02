@@ -1,0 +1,65 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/26.2.2 Chrome/134.0.6998.178 Electron/35.1.2 Safari/537.36" version="26.2.2">
+  <diagram name="Page-1" id="nfCr19SNyntTrU6AY9Jh">
+    <mxGraphModel dx="548" dy="557" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="ky0z4Si8NKJY9GEZRE_f-1" value="" style="verticalLabelPosition=bottom;sketch=0;aspect=fixed;html=1;verticalAlign=top;strokeColor=none;align=center;outlineConnect=0;shape=mxgraph.citrix.desktop;" vertex="1" parent="1">
+          <mxGeometry x="20" y="370" width="89" height="98" as="geometry" />
+        </mxCell>
+        <mxCell id="ky0z4Si8NKJY9GEZRE_f-2" value="" style="verticalLabelPosition=bottom;sketch=0;aspect=fixed;html=1;verticalAlign=top;strokeColor=none;align=center;outlineConnect=0;shape=mxgraph.citrix.tablet_1;" vertex="1" parent="1">
+          <mxGeometry x="20" y="100" width="61" height="79" as="geometry" />
+        </mxCell>
+        <mxCell id="ky0z4Si8NKJY9GEZRE_f-3" value="" style="verticalLabelPosition=bottom;sketch=0;aspect=fixed;html=1;verticalAlign=top;strokeColor=none;align=center;outlineConnect=0;shape=mxgraph.citrix.database_server;" vertex="1" parent="1">
+          <mxGeometry x="300" y="240" width="80" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="ky0z4Si8NKJY9GEZRE_f-4" value="" style="verticalLabelPosition=bottom;sketch=0;aspect=fixed;html=1;verticalAlign=top;strokeColor=none;align=center;outlineConnect=0;shape=mxgraph.citrix.printer;" vertex="1" parent="1">
+          <mxGeometry x="150" y="310" width="70" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="ky0z4Si8NKJY9GEZRE_f-5" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;startFill=1;strokeWidth=5;strokeColor=#FF3333;" edge="1" parent="1" source="ky0z4Si8NKJY9GEZRE_f-2" target="ky0z4Si8NKJY9GEZRE_f-3">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="170" y="100" as="sourcePoint" />
+            <mxPoint x="190" y="270" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="340" y="140" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ky0z4Si8NKJY9GEZRE_f-6" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;startFill=1;strokeWidth=5;strokeColor=#FF3333;" edge="1" parent="1" source="ky0z4Si8NKJY9GEZRE_f-1" target="ky0z4Si8NKJY9GEZRE_f-3">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="81" y="440" as="sourcePoint" />
+            <mxPoint x="290" y="550" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="340" y="420" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ky0z4Si8NKJY9GEZRE_f-8" value="" style="curved=1;endArrow=none;html=1;rounded=0;startFill=0;" edge="1" parent="1" source="ky0z4Si8NKJY9GEZRE_f-1" target="ky0z4Si8NKJY9GEZRE_f-4">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="140" y="390" as="sourcePoint" />
+            <mxPoint x="190" y="340" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="140" y="420" />
+              <mxPoint x="130" y="360" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ky0z4Si8NKJY9GEZRE_f-9" value="Lainaussovellus&lt;div&gt;user.py&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="30" y="190" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="ky0z4Si8NKJY9GEZRE_f-10" value="psycopg" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=15;labelBackgroundColor=default;" vertex="1" parent="1">
+          <mxGeometry x="190" y="125" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="ky0z4Si8NKJY9GEZRE_f-15" value="psycopg" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=15;labelBackgroundColor=default;" vertex="1" parent="1">
+          <mxGeometry x="190" y="404" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="ky0z4Si8NKJY9GEZRE_f-16" value="Hallintasovellus&lt;div&gt;administrative.py&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="40" y="480" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="ky0z4Si8NKJY9GEZRE_f-17" value="PostgreSQL-palvelin&lt;div&gt;autolainaus-tietokanta&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="380" y="260" width="150" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
