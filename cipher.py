@@ -56,8 +56,37 @@ def decrypt(cipher: object, cryptoText: str | bytes, byteMode: bool=False) -> st
     else:
         plainText = cipher.decrypt(cryptoText).decode()
     return  plainText
+
+def encryptString(plainText: str, key=b'NpCcppnJQeRysyr7hlqgaCSdYO5qvuaWU9ZzePqb53k=') -> str:
+    """Encrypts a block of plain text into Fernet string
+
+    Args:
+        plainText (str): The text to be encrypted
+        key (bytes, optional): A secret key. Defaults to b'NpCcppnJQeRysyr7hlqgaCSdYO5qvuaWU9ZzePqb53k='.
+
+    Returns:
+        str: Encrypted string
+    """
+    cipherEngine = createCipher(key) # Luodaan salausmoottori
+    byteForm = plainText.encode() # Muunnetaan tavumuotoon sisäänrakennetulla encode-metodilla
+    cryptoText = encrypt(cipherEngine, byteForm).decode() # Salataan ja muunnetaan salattu teksti merkkijonoksi decode-metodilla
+    return cryptoText
+
+def decryptString(cryptoText: str | bytes, key=b'NpCcppnJQeRysyr7hlqgaCSdYO5qvuaWU9ZzePqb53k=') -> str | bytes:
+    """Decrypts a Fernet encrypted string to a plain text string
+
+    Args:
+        cryptoText (str): Encrypted block of text
+        key (bytes, optional): A secret key. Defaults to b'NpCcppnJQeRysyr7hlqgaCSdYO5qvuaWU9ZzePqb53k='.
+
+    Returns:
+        str: Plain text version of the encrypted text block
+    """
+    cipherEngine = createCipher(key)
+    plainText = decrypt(cipherEngine, cryptoText)
+    return plainText
     
-# TODO: Lisää jossain vaiheessa funnktiot, jotka ottavat parametriksi vain avaimen ja tekstin
+# TODO: Lisää jossain vaiheessa funktiot, jotka ottavat parametriksi vain avaimen ja tekstin
 
 if __name__ == "__main__":
     
