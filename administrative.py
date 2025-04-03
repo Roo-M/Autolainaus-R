@@ -10,9 +10,10 @@ import sys # Käynnistysargumentit
 import json # JSON-objektien ja tiedostojen käsittely
 
 # Asennuksen vaativat kirjastot
+import dbOperations # PostgreSQL-tietokantayhteydet
 from PySide6 import QtWidgets # Qt-vimpaimet
 
-# Käyttöliittymä, moduulien lataukset
+# Käyttöliittymämoduulien lataukset
 from administrative_ui import Ui_MainWindow # Käännetyn käyttöliittymän luokka
 from settingsDialog_ui import Ui_Dialog as Settings_Dialog # Asetukset-dialogin luokka
 from aboutDialog_ui import Ui_Dialog as About_Dialog
@@ -36,6 +37,31 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         # Kutsutaan käyttöliittymän muodostusmetodia setupUi
         self.ui.setupUi(self)
+
+        # Rutiini, joka lukee asetukset, jos ne ovat olemassa
+        try:
+            # Avataan asetustiedosto ja muutetaan se Python sanakirjaksi
+            with open('settings.json', 'rt') as settingsFile: # With sulkee tiedoston automaattisesti
+                
+                # TODO: Mieti kannattaako muuttaa json.load(settingsFile)-komennoksi
+                jsonData = settingsFile.read()
+                self.currentSettings = json.loads(jsonData)
+
+            print('Käyttäjätunnus on', self.currentSettings['userName'])
+            print('Tietokanta on', self.currentSettings['database'])
+            
+            # Huom! Salasana pitää tallentaa JSON-tiedostoon tavallisena merkkijonona,
+            # ei byte string muodossa. Fernet-salauskirjastossa avain on aina tavumuodossa.
+            # Salausta varten merkkijono on muutettava aina tavumuotoon. Salattu teksti 
+            # voidaan tallentaa merkkijonona ja salakirjoitus purkaa suoraan merkkijonosta!
+            
+            # TODO: Poista print-komennot
+
+        except Exception as e:
+            
+            print('Asetusten lataamisessa tapahtui virhe: ', str(e))
+            self.openSettingsDialog()
+
 
         # OHJELMOIDUT SIGNAALIT
         # ---------------------
@@ -93,8 +119,9 @@ class SaveSettingsDialog(QtWidgets.QDialog, Settings_Dialog):
         # Salausavain luottamuksellisten asetusten kryptaamiseen
         # Avainta ei saa vaihtaa ohjelman käyttöönoton jälkeen!
         # Avain on luotu cipher.py
-        self.secretKey = b'NpCcppnJQeRysyr7hlqgaCSdYO5qvuaWU9ZzePqb53k='
-        self.cryptoEngine = cipher.createCipher(self.secretKey)
+        # self.secretKey = b'NpCcppnJQeRysyr7hlqgaCSdYO5qvuaWU9ZzePqb53k='
+        # self.cryptoEngine = cipher.createCipher(self.secretKey)
+    
 
         # Luetaan asetustiedosto Python-sanakirjaksi
         self.currentSettings = {}
@@ -137,7 +164,7 @@ class SaveSettingsDialog(QtWidgets.QDialog, Settings_Dialog):
         plainTextpassword = bytes(self.ui.passwordLineEdit.text(), 'utf-8')
 
         # Salataan ja muunnetaan tavalliseksi merkkijonoksi, jotta JSON-tallennus onnistuu
-        encryptedPassword = str(cipher.encrypt(self.cryptoEngine, plainTextpassword))
+        encryptedPassword = cipher.encryptString(plainTextpassword)
 
         # Muodostetaan muuttujista Python-sanakirja
         settingsDictionary = {
