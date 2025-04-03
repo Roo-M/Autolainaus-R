@@ -552,7 +552,7 @@ color: rgb(255, 255, 255);</string>
        <string>Tallennetut ryhmät</string>
       </property>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>11</x>
@@ -845,6 +845,7 @@ color: rgb(255, 255, 255);</string>
      <string>Asetukset</string>
     </property>
     <addaction name="actionMuokkaa"/>
+    <addaction name="actionSalasana"/>
     <addaction name="actionTietoja_ohjelmasta"/>
    </widget>
    <addaction name="menuAsetukset"/>
@@ -857,16 +858,18 @@ color: rgb(255, 255, 255);</string>
    <property name="toolTip">
     <string>Muokkaa ohjelman asetuksia</string>
    </property>
-   <property name="shortcut">
-    <string>Ctrl+Shift+A</string>
-   </property>
   </action>
   <action name="actionTietoja_ohjelmasta">
    <property name="text">
     <string>Tietoja ohjelmasta...</string>
    </property>
-   <property name="shortcut">
-    <string>Ctrl+Shift+T</string>
+   <property name="visible">
+    <bool>true</bool>
+   </property>
+  </action>
+  <action name="actionSalasana">
+   <property name="text">
+    <string>Salasana...</string>
    </property>
   </action>
  </widget>
