@@ -22,10 +22,12 @@ class Ui_Dialog(object):
     def setupUi(self, Dialog):
         if not Dialog.objectName():
             Dialog.setObjectName(u"Dialog")
-        Dialog.resize(269, 189)
+        Dialog.resize(276, 221)
+        icon = QIcon(QIcon.fromTheme(u"applications-development"))
+        Dialog.setWindowIcon(icon)
         self.saveSettingsPushButton = QPushButton(Dialog)
         self.saveSettingsPushButton.setObjectName(u"saveSettingsPushButton")
-        self.saveSettingsPushButton.setGeometry(QRect(190, 160, 70, 25))
+        self.saveSettingsPushButton.setGeometry(QRect(190, 170, 70, 25))
         font = QFont()
         font.setPointSize(10)
         font.setBold(True)
@@ -35,7 +37,7 @@ class Ui_Dialog(object):
 "color: rgb(255, 255, 255);")
         self.layoutWidget = QWidget(Dialog)
         self.layoutWidget.setObjectName(u"layoutWidget")
-        self.layoutWidget.setGeometry(QRect(10, 10, 251, 146))
+        self.layoutWidget.setGeometry(QRect(10, 10, 251, 156))
         self.formLayout = QFormLayout(self.layoutWidget)
         self.formLayout.setObjectName(u"formLayout")
         self.formLayout.setContentsMargins(0, 0, 0, 0)
@@ -100,10 +102,17 @@ class Ui_Dialog(object):
         self.passwordLineEdit = QLineEdit(self.layoutWidget)
         self.passwordLineEdit.setObjectName(u"passwordLineEdit")
         self.passwordLineEdit.setFont(font2)
-        self.passwordLineEdit.setEchoMode(QLineEdit.Password)
+        self.passwordLineEdit.setEchoMode(QLineEdit.EchoMode.PasswordEchoOnEdit)
 
         self.formLayout.setWidget(4, QFormLayout.FieldRole, self.passwordLineEdit)
 
+        self.closePushButton = QPushButton(Dialog)
+        self.closePushButton.setObjectName(u"closePushButton")
+        self.closePushButton.setGeometry(QRect(100, 170, 70, 25))
+        self.closePushButton.setFont(font)
+        self.closePushButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.closePushButton.setStyleSheet(u"color: rgb(255, 255, 255);\n"
+"background-color: rgb(255, 0, 0);")
 
         self.retranslateUi(Dialog)
 
@@ -136,5 +145,9 @@ class Ui_Dialog(object):
 #if QT_CONFIG(tooltip)
         self.passwordLineEdit.setToolTip(QCoreApplication.translate("Dialog", u"<html><head/><body><p><span style=\" font-size:10pt;\">Salasana</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
+#if QT_CONFIG(tooltip)
+        self.closePushButton.setToolTip(QCoreApplication.translate("Dialog", u"<html><head/><body><p><span style=\" font-size:10pt;\">Tallentaa asetukset tiedostoon</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.closePushButton.setText(QCoreApplication.translate("Dialog", u"Sulje", None))
     # retranslateUi
 
