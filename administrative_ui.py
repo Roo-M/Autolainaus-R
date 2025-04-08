@@ -27,6 +27,8 @@ class Ui_MainWindow(object):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
         MainWindow.resize(800, 648)
+        icon = QIcon(QIcon.fromTheme(u"go-home"))
+        MainWindow.setWindowIcon(icon)
         self.actionMuokkaa = QAction(MainWindow)
         self.actionMuokkaa.setObjectName(u"actionMuokkaa")
         self.actionTietoja_ohjelmasta = QAction(MainWindow)
@@ -37,7 +39,7 @@ class Ui_MainWindow(object):
         self.tabWidget.setObjectName(u"tabWidget")
         self.tabWidget.setGeometry(QRect(0, 0, 671, 591))
         self.tabWidget.setCursor(QCursor(Qt.CursorShape.ArrowCursor))
-        self.tabWidget.setFocusPolicy(Qt.TabFocus)
+        self.tabWidget.setFocusPolicy(Qt.FocusPolicy.TabFocus)
         self.studentTab = QWidget()
         self.studentTab.setObjectName(u"studentTab")
         self.studentTab.setCursor(QCursor(Qt.CursorShape.ArrowCursor))
@@ -70,7 +72,7 @@ class Ui_MainWindow(object):
 "")
         self.layoutWidget = QWidget(self.studentTab)
         self.layoutWidget.setObjectName(u"layoutWidget")
-        self.layoutWidget.setGeometry(QRect(10, 10, 251, 146))
+        self.layoutWidget.setGeometry(QRect(10, 10, 251, 156))
         self.personsFormLayout = QFormLayout(self.layoutWidget)
         self.personsFormLayout.setObjectName(u"personsFormLayout")
         self.personsFormLayout.setContentsMargins(0, 0, 0, 0)
@@ -141,7 +143,7 @@ class Ui_MainWindow(object):
         self.vehicleTab.setObjectName(u"vehicleTab")
         self.layoutWidget1 = QWidget(self.vehicleTab)
         self.layoutWidget1.setObjectName(u"layoutWidget1")
-        self.layoutWidget1.setGeometry(QRect(10, 10, 218, 146))
+        self.layoutWidget1.setGeometry(QRect(10, 10, 218, 156))
         self.vehicleFormLayout = QFormLayout(self.layoutWidget1)
         self.vehicleFormLayout.setObjectName(u"vehicleFormLayout")
         self.vehicleFormLayout.setContentsMargins(0, 0, 0, 0)
@@ -260,31 +262,31 @@ class Ui_MainWindow(object):
         self.storedGroupsLabel.setObjectName(u"storedGroupsLabel")
         self.storedGroupsLabel.setGeometry(QRect(10, 100, 121, 24))
         self.storedGroupsLabel.setFont(font)
-        self.widget = QWidget(self.groupTab)
-        self.widget.setObjectName(u"widget")
-        self.widget.setGeometry(QRect(11, 11, 254, 56))
-        self.formLayout = QFormLayout(self.widget)
+        self.layoutWidget2 = QWidget(self.groupTab)
+        self.layoutWidget2.setObjectName(u"layoutWidget2")
+        self.layoutWidget2.setGeometry(QRect(11, 11, 254, 60))
+        self.formLayout = QFormLayout(self.layoutWidget2)
         self.formLayout.setObjectName(u"formLayout")
         self.formLayout.setContentsMargins(0, 0, 0, 0)
-        self.groupNameLabel = QLabel(self.widget)
+        self.groupNameLabel = QLabel(self.layoutWidget2)
         self.groupNameLabel.setObjectName(u"groupNameLabel")
         self.groupNameLabel.setFont(font)
 
         self.formLayout.setWidget(0, QFormLayout.LabelRole, self.groupNameLabel)
 
-        self.groupNameLineEdit = QLineEdit(self.widget)
+        self.groupNameLineEdit = QLineEdit(self.layoutWidget2)
         self.groupNameLineEdit.setObjectName(u"groupNameLineEdit")
         self.groupNameLineEdit.setFont(font2)
 
         self.formLayout.setWidget(0, QFormLayout.FieldRole, self.groupNameLineEdit)
 
-        self.responsiblePersonLabel = QLabel(self.widget)
+        self.responsiblePersonLabel = QLabel(self.layoutWidget2)
         self.responsiblePersonLabel.setObjectName(u"responsiblePersonLabel")
         self.responsiblePersonLabel.setFont(font)
 
         self.formLayout.setWidget(1, QFormLayout.LabelRole, self.responsiblePersonLabel)
 
-        self.responsiblePersonLineEdit = QLineEdit(self.widget)
+        self.responsiblePersonLineEdit = QLineEdit(self.layoutWidget2)
         self.responsiblePersonLineEdit.setObjectName(u"responsiblePersonLineEdit")
         self.responsiblePersonLineEdit.setFont(font2)
 
@@ -346,7 +348,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 800, 21))
+        self.menubar.setGeometry(QRect(0, 0, 800, 22))
         self.menuAsetukset = QMenu(self.menubar)
         self.menuAsetukset.setObjectName(u"menuAsetukset")
         MainWindow.setMenuBar(self.menubar)
@@ -360,7 +362,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.tabWidget.setCurrentIndex(3)
+        self.tabWidget.setCurrentIndex(2)
 
 
         QMetaObject.connectSlotsByName(MainWindow)

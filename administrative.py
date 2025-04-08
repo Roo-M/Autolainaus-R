@@ -47,15 +47,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 jsonData = settingsFile.read()
                 self.currentSettings = json.loads(jsonData)
 
-            print('Käyttäjätunnus on', self.currentSettings['userName'])
-            print('Tietokanta on', self.currentSettings['database'])
             
             # Huom! Salasana pitää tallentaa JSON-tiedostoon tavallisena merkkijonona,
-            # ei byte string muodossa. Fernet-salauskirjastossa avain on aina tavumuodossa.
-            # Salausta varten merkkijono on muutettava aina tavumuotoon. Salattu teksti 
-            # voidaan tallentaa merkkijonona ja salakirjoitus purkaa suoraan merkkijonosta!
+            # ei byte string muodossa. Salauskirjaston decode ja encode metodit hoitavat asian
             
-            # TODO: Poista print-komennot
 
         except Exception as e:
             
@@ -116,13 +111,6 @@ class SaveSettingsDialog(QtWidgets.QDialog, Settings_Dialog):
         # Kutsutaan käyttöliittymän muodostusmetodia setupUi
         self.ui.setupUi(self)
 
-        # Salausavain luottamuksellisten asetusten kryptaamiseen
-        # Avainta ei saa vaihtaa ohjelman käyttöönoton jälkeen!
-        # Avain on luotu cipher.py
-        # self.secretKey = b'NpCcppnJQeRysyr7hlqgaCSdYO5qvuaWU9ZzePqb53k='
-        # self.cryptoEngine = cipher.createCipher(self.secretKey)
-    
-
         # Luetaan asetustiedosto Python-sanakirjaksi
         self.currentSettings = {}
 
@@ -137,7 +125,8 @@ class SaveSettingsDialog(QtWidgets.QDialog, Settings_Dialog):
             self.ui.portLineEdit.setText(self.currentSettings['port'])
             self.ui.databaseLineEdit.setText(self.currentSettings['database'])
             self.ui.userLineEdit.setText(self.currentSettings['userName'])
-            self.ui.passwordLineEdit.setText(self.currentSettings['password'])
+            plaintextPassword = cipher.decryptString(self.currentSettings['password'])
+            self.ui.passwordLineEdit.setText(plaintextPassword)
         except Exception as e:
             self.openInfo()
         
@@ -147,6 +136,9 @@ class SaveSettingsDialog(QtWidgets.QDialog, Settings_Dialog):
 
         # Kun Tallenna-painiketta klikattu, kutsutaan saveToJsonFile-metodia
         self.ui.saveSettingsPushButton.clicked.connect(self.saveToJsonFile)
+
+        # Sulje-painikkeen toiminnot
+        self.ui.closePushButton.clicked.connect(self.closeSettingsDialog)
 
     # OHJELMOIDUT SLOTIT (luokan metodit)
     # -----------------------------------
@@ -161,7 +153,7 @@ class SaveSettingsDialog(QtWidgets.QDialog, Settings_Dialog):
         userName = self.ui.userLineEdit.text()
 
         # Muutetaan merkkijono tavumuotoon (byte, merkistö UTF-8)
-        plainTextpassword = bytes(self.ui.passwordLineEdit.text(), 'utf-8')
+        plainTextpassword = self.ui.passwordLineEdit.text()
 
         # Salataan ja muunnetaan tavalliseksi merkkijonoksi, jotta JSON-tallennus onnistuu
         encryptedPassword = cipher.encryptString(plainTextpassword)
@@ -182,6 +174,11 @@ class SaveSettingsDialog(QtWidgets.QDialog, Settings_Dialog):
         # Avataan asetustiedosto ja kirjoitetaan asetukset
         with open('settings.json', 'wt') as settingsFile:
             settingsFile.write(jsonData)
+
+        # Suljetaan dialogin ikkuna
+        self.close()
+    def closeSettingsDialog(self):
+        self.close()
 
 
     # Avataan MessageBox, jossa kerrotaan että tehdään uusi asetustiedosto
