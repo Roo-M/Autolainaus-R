@@ -61,9 +61,14 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # OHJELMOIDUT SIGNAALIT
         # ---------------------
 
-        # Asetukset-valikon muokkaa toiminto avaa Asetukset-dialogi-ikkunan
+        # Valikkotoiminnot
         self.ui.actionMuokkaa.triggered.connect(self.openSettingsDialog)
         self.ui.actionTietoja_ohjelmasta.triggered.connect(self.openAboutDialog)
+
+        # Painikkeet
+        self.ui.saveGroupPushButton.clicked.connect(self.saveGroup)
+
+
 
 
 
@@ -75,18 +80,53 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     # DIALOGIEN AVAUSMETODIT
     # ----------------------
 
+    # Valikkotoimintojen slotit
+    # -------------------------
+
     # Asetusdialogin avaus
     def openSettingsDialog(self):
         self.saveSettingsDialog = SaveSettingsDialog() # Luodaan luokasta olio
         self.saveSettingsDialog.setWindowTitle('Palvelinasetukset')
         self.saveSettingsDialog.exec() # Luodaan dialogille oma event loop
 
-
     # Tietoja ohjelmasta -dialogin avaus
     def openAboutDialog(self):
         self.aboutDialog = AboutDialog()
         self.aboutDialog.setWindowTitle('Tietoja ohjelmasta')
         self.aboutDialog.exec() # Luodaan dialogi event loop
+
+    # Painikkeiden slotit
+    # -------------------
+
+    # Ryhmän tallennus
+    def saveGroup(self):
+        # Määritellään tietokanta-asetukset
+        dbSettings = self.currentSettings
+        plainTextPassword = cipher.decryptString(dbSettings['password'])
+        dbSettings['password'] = plainTextPassword
+        print('Tietokanta asetukset ovat:', dbSettings)
+
+        # Määritellään tallennusmetodin vaatimat parametrit
+        tableName = 'ryhma'
+        group = self.ui.groupNameLineEdit.text()
+        responsiblePerson = self.ui.responsiblePersonLineEdit.text()
+        groupDictionary = {'ryhma': group,
+                           'vastuuhenkilo': responsiblePerson 
+                           }
+        
+        # Luodaan tietokantayhteys-olio
+        dbConnection = dbOperations.DbConnection(dbSettings)
+
+        # Kutsutaan tallennusmetodia
+        try:
+            dbConnection.addToTable(tableName, groupDictionary)
+        except Exception as e:
+            print('Virheilmoitus', str(e))
+            self.openWarning()
+        
+
+    # Virheilmoitukset ja muut Message Box -dialogit
+    # ----------------------------------------------
 
     # Malli mahdollista virheilmoitusta varten
     def openWarning(self):
@@ -177,6 +217,7 @@ class SaveSettingsDialog(QtWidgets.QDialog, Settings_Dialog):
 
         # Suljetaan dialogin ikkuna
         self.close()
+
     def closeSettingsDialog(self):
         self.close()
 

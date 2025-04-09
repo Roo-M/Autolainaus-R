@@ -478,7 +478,7 @@ color: rgb(255, 255, 255);</string>
       <property name="geometry">
        <rect>
         <x>280</x>
-        <y>40</y>
+        <y>45</y>
         <width>75</width>
         <height>25</height>
        </rect>
@@ -500,7 +500,7 @@ color: rgb(255, 255, 255);</string>
        <string>Tallenna</string>
       </property>
      </widget>
-     <widget class="QTableWidget" name="storedGroupsTableWidget">
+     <widget class="QTableWidget" name="savedGroupsTableWidget">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -533,7 +533,7 @@ color: rgb(255, 255, 255);</string>
       <column/>
       <column/>
      </widget>
-     <widget class="QLabel" name="storedGroupsLabel">
+     <widget class="QLabel" name="savedGroupsLabel">
       <property name="geometry">
        <rect>
         <x>10</x>
