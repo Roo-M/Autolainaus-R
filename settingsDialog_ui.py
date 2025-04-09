@@ -113,6 +113,9 @@ class Ui_Dialog(object):
         self.closePushButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.closePushButton.setStyleSheet(u"color: rgb(255, 255, 255);\n"
 "background-color: rgb(255, 0, 0);")
+        self.layoutWidget.raise_()
+        self.closePushButton.raise_()
+        self.saveSettingsPushButton.raise_()
 
         self.retranslateUi(Dialog)
 
@@ -146,7 +149,7 @@ class Ui_Dialog(object):
         self.passwordLineEdit.setToolTip(QCoreApplication.translate("Dialog", u"<html><head/><body><p><span style=\" font-size:10pt;\">Salasana</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
 #if QT_CONFIG(tooltip)
-        self.closePushButton.setToolTip(QCoreApplication.translate("Dialog", u"<html><head/><body><p><span style=\" font-size:10pt;\">Tallentaa asetukset tiedostoon</span></p></body></html>", None))
+        self.closePushButton.setToolTip(QCoreApplication.translate("Dialog", u"<html><head/><body><p><span style=\" font-size:10pt;\">Sulkee ikkunan</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.closePushButton.setText(QCoreApplication.translate("Dialog", u"Sulje", None))
     # retranslateUi

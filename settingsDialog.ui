@@ -199,7 +199,7 @@ color: rgb(255, 255, 255);</string>
     <cursorShape>PointingHandCursor</cursorShape>
    </property>
    <property name="toolTip">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Tallentaa asetukset tiedostoon&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Sulkee ikkunan&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
    <property name="styleSheet">
     <string notr="true">color: rgb(255, 255, 255);
@@ -209,6 +209,9 @@ background-color: rgb(255, 0, 0);</string>
     <string>Sulje</string>
    </property>
   </widget>
+  <zorder>layoutWidget</zorder>
+  <zorder>closePushButton</zorder>
+  <zorder>saveSettingsPushButton</zorder>
  </widget>
  <resources/>
  <connections/>
