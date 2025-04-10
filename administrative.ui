@@ -33,7 +33,7 @@
      <enum>Qt::FocusPolicy::TabFocus</enum>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="studentTab">
      <property name="cursor">
@@ -98,7 +98,7 @@
       <property name="geometry">
        <rect>
         <x>270</x>
-        <y>130</y>
+        <y>173</y>
         <width>75</width>
         <height>25</height>
        </rect>
@@ -121,16 +121,16 @@ color: rgb(255, 255, 255);
        <string>Tallenna</string>
       </property>
      </widget>
-     <widget class="QWidget" name="layoutWidget">
+     <widget class="QWidget" name="">
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>10</y>
-        <width>251</width>
-        <height>156</height>
+        <y>11</y>
+        <width>244</width>
+        <height>188</height>
        </rect>
       </property>
-      <layout class="QFormLayout" name="personsFormLayout">
+      <layout class="QGridLayout" name="studentGridLayout">
        <item row="0" column="0">
         <widget class="QLabel" name="ssnLabel">
          <property name="font">
@@ -206,6 +206,18 @@ color: rgb(255, 255, 255);
          </property>
         </widget>
        </item>
+       <item row="3" column="1">
+        <widget class="QComboBox" name="groupComboBox">
+         <property name="font">
+          <font>
+           <pointsize>11</pointsize>
+          </font>
+         </property>
+         <property name="currentText">
+          <string/>
+         </property>
+        </widget>
+       </item>
        <item row="4" column="0">
         <widget class="QLabel" name="vehicleClassLabel">
          <property name="font">
@@ -214,7 +226,7 @@ color: rgb(255, 255, 255);
           </font>
          </property>
          <property name="text">
-          <string>Ajoneuvoluokka</string>
+          <string>Ajokorttiluokka</string>
          </property>
         </widget>
        </item>
@@ -227,8 +239,20 @@ color: rgb(255, 255, 255);
          </property>
         </widget>
        </item>
-       <item row="3" column="1">
-        <widget class="QComboBox" name="groupComboBox">
+       <item row="5" column="0">
+        <widget class="QLabel" name="emailLabel">
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Sähköposti</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1">
+        <widget class="QLineEdit" name="emailLineEdit">
          <property name="font">
           <font>
            <pointsize>11</pointsize>
@@ -248,11 +272,11 @@ color: rgb(255, 255, 255);
        <rect>
         <x>10</x>
         <y>10</y>
-        <width>218</width>
+        <width>252</width>
         <height>156</height>
        </rect>
       </property>
-      <layout class="QFormLayout" name="vehicleFormLayout">
+      <layout class="QGridLayout" name="vehicleGridLayout">
        <item row="0" column="0">
         <widget class="QLabel" name="licensePlateNumberLabel">
          <property name="font">
@@ -363,8 +387,8 @@ color: rgb(255, 255, 255);
      <widget class="QPushButton" name="saveVehiclePushButton">
       <property name="geometry">
        <rect>
-        <x>240</x>
-        <y>130</y>
+        <x>280</x>
+        <y>140</y>
         <width>75</width>
         <height>25</height>
        </rect>
@@ -389,8 +413,8 @@ color: rgb(255, 255, 255);</string>
      <widget class="QPushButton" name="printBarcodePushButton">
       <property name="geometry">
        <rect>
-        <x>240</x>
-        <y>100</y>
+        <x>280</x>
+        <y>110</y>
         <width>75</width>
         <height>25</height>
        </rect>
@@ -556,11 +580,11 @@ color: rgb(255, 255, 255);</string>
        <rect>
         <x>11</x>
         <y>11</y>
-        <width>254</width>
+        <width>237</width>
         <height>60</height>
        </rect>
       </property>
-      <layout class="QFormLayout" name="formLayout">
+      <layout class="QGridLayout" name="groupGridLayout">
        <item row="0" column="0">
         <widget class="QLabel" name="groupNameLabel">
          <property name="font">

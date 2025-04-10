@@ -16,7 +16,7 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
     QIcon, QImage, QKeySequence, QLinearGradient,
     QPainter, QPalette, QPixmap, QRadialGradient,
     QTransform)
-from PySide6.QtWidgets import (QApplication, QComboBox, QDateEdit, QFormLayout,
+from PySide6.QtWidgets import (QApplication, QComboBox, QDateEdit, QGridLayout,
     QHeaderView, QLabel, QLineEdit, QMainWindow,
     QMenu, QMenuBar, QPushButton, QSizePolicy,
     QStatusBar, QTabWidget, QTableWidget, QTableWidgetItem,
@@ -61,7 +61,7 @@ class Ui_MainWindow(object):
         self.registeredPersonLabel.setFont(font)
         self.savePersonPushButton = QPushButton(self.studentTab)
         self.savePersonPushButton.setObjectName(u"savePersonPushButton")
-        self.savePersonPushButton.setGeometry(QRect(270, 130, 75, 25))
+        self.savePersonPushButton.setGeometry(QRect(270, 173, 75, 25))
         font1 = QFont()
         font1.setPointSize(10)
         font1.setBold(True)
@@ -70,153 +70,165 @@ class Ui_MainWindow(object):
         self.savePersonPushButton.setStyleSheet(u"background-color: rgb(0, 170, 255);\n"
 "color: rgb(255, 255, 255);\n"
 "")
-        self.layoutWidget = QWidget(self.studentTab)
-        self.layoutWidget.setObjectName(u"layoutWidget")
-        self.layoutWidget.setGeometry(QRect(10, 10, 251, 156))
-        self.personsFormLayout = QFormLayout(self.layoutWidget)
-        self.personsFormLayout.setObjectName(u"personsFormLayout")
-        self.personsFormLayout.setContentsMargins(0, 0, 0, 0)
-        self.ssnLabel = QLabel(self.layoutWidget)
+        self.widget = QWidget(self.studentTab)
+        self.widget.setObjectName(u"widget")
+        self.widget.setGeometry(QRect(10, 11, 244, 188))
+        self.studentGridLayout = QGridLayout(self.widget)
+        self.studentGridLayout.setObjectName(u"studentGridLayout")
+        self.studentGridLayout.setContentsMargins(0, 0, 0, 0)
+        self.ssnLabel = QLabel(self.widget)
         self.ssnLabel.setObjectName(u"ssnLabel")
         self.ssnLabel.setFont(font)
 
-        self.personsFormLayout.setWidget(0, QFormLayout.LabelRole, self.ssnLabel)
+        self.studentGridLayout.addWidget(self.ssnLabel, 0, 0, 1, 1)
 
-        self.ssnLineEdit = QLineEdit(self.layoutWidget)
+        self.ssnLineEdit = QLineEdit(self.widget)
         self.ssnLineEdit.setObjectName(u"ssnLineEdit")
         font2 = QFont()
         font2.setPointSize(11)
         self.ssnLineEdit.setFont(font2)
 
-        self.personsFormLayout.setWidget(0, QFormLayout.FieldRole, self.ssnLineEdit)
+        self.studentGridLayout.addWidget(self.ssnLineEdit, 0, 1, 1, 1)
 
-        self.firstNameLabel = QLabel(self.layoutWidget)
+        self.firstNameLabel = QLabel(self.widget)
         self.firstNameLabel.setObjectName(u"firstNameLabel")
         self.firstNameLabel.setFont(font)
 
-        self.personsFormLayout.setWidget(1, QFormLayout.LabelRole, self.firstNameLabel)
+        self.studentGridLayout.addWidget(self.firstNameLabel, 1, 0, 1, 1)
 
-        self.firstNameLineEdit = QLineEdit(self.layoutWidget)
+        self.firstNameLineEdit = QLineEdit(self.widget)
         self.firstNameLineEdit.setObjectName(u"firstNameLineEdit")
         self.firstNameLineEdit.setFont(font2)
 
-        self.personsFormLayout.setWidget(1, QFormLayout.FieldRole, self.firstNameLineEdit)
+        self.studentGridLayout.addWidget(self.firstNameLineEdit, 1, 1, 1, 1)
 
-        self.lastNameLabel = QLabel(self.layoutWidget)
+        self.lastNameLabel = QLabel(self.widget)
         self.lastNameLabel.setObjectName(u"lastNameLabel")
         self.lastNameLabel.setFont(font)
 
-        self.personsFormLayout.setWidget(2, QFormLayout.LabelRole, self.lastNameLabel)
+        self.studentGridLayout.addWidget(self.lastNameLabel, 2, 0, 1, 1)
 
-        self.lastNameLineEdit = QLineEdit(self.layoutWidget)
+        self.lastNameLineEdit = QLineEdit(self.widget)
         self.lastNameLineEdit.setObjectName(u"lastNameLineEdit")
         self.lastNameLineEdit.setFont(font2)
 
-        self.personsFormLayout.setWidget(2, QFormLayout.FieldRole, self.lastNameLineEdit)
+        self.studentGridLayout.addWidget(self.lastNameLineEdit, 2, 1, 1, 1)
 
-        self.groupLabel = QLabel(self.layoutWidget)
+        self.groupLabel = QLabel(self.widget)
         self.groupLabel.setObjectName(u"groupLabel")
         self.groupLabel.setFont(font)
 
-        self.personsFormLayout.setWidget(3, QFormLayout.LabelRole, self.groupLabel)
+        self.studentGridLayout.addWidget(self.groupLabel, 3, 0, 1, 1)
 
-        self.vehicleClassLabel = QLabel(self.layoutWidget)
-        self.vehicleClassLabel.setObjectName(u"vehicleClassLabel")
-        self.vehicleClassLabel.setFont(font)
-
-        self.personsFormLayout.setWidget(4, QFormLayout.LabelRole, self.vehicleClassLabel)
-
-        self.vehicleClassLineEdit = QLineEdit(self.layoutWidget)
-        self.vehicleClassLineEdit.setObjectName(u"vehicleClassLineEdit")
-        self.vehicleClassLineEdit.setFont(font2)
-
-        self.personsFormLayout.setWidget(4, QFormLayout.FieldRole, self.vehicleClassLineEdit)
-
-        self.groupComboBox = QComboBox(self.layoutWidget)
+        self.groupComboBox = QComboBox(self.widget)
         self.groupComboBox.setObjectName(u"groupComboBox")
         self.groupComboBox.setFont(font2)
 
-        self.personsFormLayout.setWidget(3, QFormLayout.FieldRole, self.groupComboBox)
+        self.studentGridLayout.addWidget(self.groupComboBox, 3, 1, 1, 1)
+
+        self.vehicleClassLabel = QLabel(self.widget)
+        self.vehicleClassLabel.setObjectName(u"vehicleClassLabel")
+        self.vehicleClassLabel.setFont(font)
+
+        self.studentGridLayout.addWidget(self.vehicleClassLabel, 4, 0, 1, 1)
+
+        self.vehicleClassLineEdit = QLineEdit(self.widget)
+        self.vehicleClassLineEdit.setObjectName(u"vehicleClassLineEdit")
+        self.vehicleClassLineEdit.setFont(font2)
+
+        self.studentGridLayout.addWidget(self.vehicleClassLineEdit, 4, 1, 1, 1)
+
+        self.emailLabel = QLabel(self.widget)
+        self.emailLabel.setObjectName(u"emailLabel")
+        self.emailLabel.setFont(font)
+
+        self.studentGridLayout.addWidget(self.emailLabel, 5, 0, 1, 1)
+
+        self.emailLineEdit = QLineEdit(self.widget)
+        self.emailLineEdit.setObjectName(u"emailLineEdit")
+        self.emailLineEdit.setFont(font2)
+
+        self.studentGridLayout.addWidget(self.emailLineEdit, 5, 1, 1, 1)
 
         self.tabWidget.addTab(self.studentTab, "")
         self.vehicleTab = QWidget()
         self.vehicleTab.setObjectName(u"vehicleTab")
-        self.layoutWidget1 = QWidget(self.vehicleTab)
-        self.layoutWidget1.setObjectName(u"layoutWidget1")
-        self.layoutWidget1.setGeometry(QRect(10, 10, 218, 156))
-        self.vehicleFormLayout = QFormLayout(self.layoutWidget1)
-        self.vehicleFormLayout.setObjectName(u"vehicleFormLayout")
-        self.vehicleFormLayout.setContentsMargins(0, 0, 0, 0)
-        self.licensePlateNumberLabel = QLabel(self.layoutWidget1)
+        self.layoutWidget = QWidget(self.vehicleTab)
+        self.layoutWidget.setObjectName(u"layoutWidget")
+        self.layoutWidget.setGeometry(QRect(10, 10, 252, 156))
+        self.vehicleGridLayout = QGridLayout(self.layoutWidget)
+        self.vehicleGridLayout.setObjectName(u"vehicleGridLayout")
+        self.vehicleGridLayout.setContentsMargins(0, 0, 0, 0)
+        self.licensePlateNumberLabel = QLabel(self.layoutWidget)
         self.licensePlateNumberLabel.setObjectName(u"licensePlateNumberLabel")
         self.licensePlateNumberLabel.setFont(font)
 
-        self.vehicleFormLayout.setWidget(0, QFormLayout.LabelRole, self.licensePlateNumberLabel)
+        self.vehicleGridLayout.addWidget(self.licensePlateNumberLabel, 0, 0, 1, 1)
 
-        self.licensePlateNumberLineEdit = QLineEdit(self.layoutWidget1)
+        self.licensePlateNumberLineEdit = QLineEdit(self.layoutWidget)
         self.licensePlateNumberLineEdit.setObjectName(u"licensePlateNumberLineEdit")
         self.licensePlateNumberLineEdit.setFont(font2)
 
-        self.vehicleFormLayout.setWidget(0, QFormLayout.FieldRole, self.licensePlateNumberLineEdit)
+        self.vehicleGridLayout.addWidget(self.licensePlateNumberLineEdit, 0, 1, 1, 1)
 
-        self.manufacturerLabel = QLabel(self.layoutWidget1)
+        self.manufacturerLabel = QLabel(self.layoutWidget)
         self.manufacturerLabel.setObjectName(u"manufacturerLabel")
         self.manufacturerLabel.setFont(font)
 
-        self.vehicleFormLayout.setWidget(1, QFormLayout.LabelRole, self.manufacturerLabel)
+        self.vehicleGridLayout.addWidget(self.manufacturerLabel, 1, 0, 1, 1)
 
-        self.manufacturerLineEdit = QLineEdit(self.layoutWidget1)
+        self.manufacturerLineEdit = QLineEdit(self.layoutWidget)
         self.manufacturerLineEdit.setObjectName(u"manufacturerLineEdit")
         self.manufacturerLineEdit.setFont(font2)
 
-        self.vehicleFormLayout.setWidget(1, QFormLayout.FieldRole, self.manufacturerLineEdit)
+        self.vehicleGridLayout.addWidget(self.manufacturerLineEdit, 1, 1, 1, 1)
 
-        self.modelLabel = QLabel(self.layoutWidget1)
+        self.modelLabel = QLabel(self.layoutWidget)
         self.modelLabel.setObjectName(u"modelLabel")
         self.modelLabel.setFont(font)
 
-        self.vehicleFormLayout.setWidget(2, QFormLayout.LabelRole, self.modelLabel)
+        self.vehicleGridLayout.addWidget(self.modelLabel, 2, 0, 1, 1)
 
-        self.modelLineEdit = QLineEdit(self.layoutWidget1)
+        self.modelLineEdit = QLineEdit(self.layoutWidget)
         self.modelLineEdit.setObjectName(u"modelLineEdit")
         self.modelLineEdit.setFont(font2)
 
-        self.vehicleFormLayout.setWidget(2, QFormLayout.FieldRole, self.modelLineEdit)
+        self.vehicleGridLayout.addWidget(self.modelLineEdit, 2, 1, 1, 1)
 
-        self.modelYearLabel = QLabel(self.layoutWidget1)
+        self.modelYearLabel = QLabel(self.layoutWidget)
         self.modelYearLabel.setObjectName(u"modelYearLabel")
         self.modelYearLabel.setFont(font)
 
-        self.vehicleFormLayout.setWidget(3, QFormLayout.LabelRole, self.modelYearLabel)
+        self.vehicleGridLayout.addWidget(self.modelYearLabel, 3, 0, 1, 1)
 
-        self.modelYearLineEdit = QLineEdit(self.layoutWidget1)
+        self.modelYearLineEdit = QLineEdit(self.layoutWidget)
         self.modelYearLineEdit.setObjectName(u"modelYearLineEdit")
         self.modelYearLineEdit.setFont(font2)
 
-        self.vehicleFormLayout.setWidget(3, QFormLayout.FieldRole, self.modelYearLineEdit)
+        self.vehicleGridLayout.addWidget(self.modelYearLineEdit, 3, 1, 1, 1)
 
-        self.capacityLabel = QLabel(self.layoutWidget1)
+        self.capacityLabel = QLabel(self.layoutWidget)
         self.capacityLabel.setObjectName(u"capacityLabel")
         self.capacityLabel.setFont(font)
 
-        self.vehicleFormLayout.setWidget(4, QFormLayout.LabelRole, self.capacityLabel)
+        self.vehicleGridLayout.addWidget(self.capacityLabel, 4, 0, 1, 1)
 
-        self.capacityLineEdit = QLineEdit(self.layoutWidget1)
+        self.capacityLineEdit = QLineEdit(self.layoutWidget)
         self.capacityLineEdit.setObjectName(u"capacityLineEdit")
         self.capacityLineEdit.setFont(font2)
 
-        self.vehicleFormLayout.setWidget(4, QFormLayout.FieldRole, self.capacityLineEdit)
+        self.vehicleGridLayout.addWidget(self.capacityLineEdit, 4, 1, 1, 1)
 
         self.saveVehiclePushButton = QPushButton(self.vehicleTab)
         self.saveVehiclePushButton.setObjectName(u"saveVehiclePushButton")
-        self.saveVehiclePushButton.setGeometry(QRect(240, 130, 75, 25))
+        self.saveVehiclePushButton.setGeometry(QRect(280, 140, 75, 25))
         self.saveVehiclePushButton.setFont(font1)
         self.saveVehiclePushButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.saveVehiclePushButton.setStyleSheet(u"background-color: rgb(0, 170, 255);\n"
 "color: rgb(255, 255, 255);")
         self.printBarcodePushButton = QPushButton(self.vehicleTab)
         self.printBarcodePushButton.setObjectName(u"printBarcodePushButton")
-        self.printBarcodePushButton.setGeometry(QRect(240, 100, 75, 25))
+        self.printBarcodePushButton.setGeometry(QRect(280, 110, 75, 25))
         self.printBarcodePushButton.setFont(font1)
         self.printBarcodePushButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.printBarcodePushButton.setStyleSheet(u"background-color: rgb(217, 149, 39);\n"
@@ -262,35 +274,35 @@ class Ui_MainWindow(object):
         self.savedGroupsLabel.setObjectName(u"savedGroupsLabel")
         self.savedGroupsLabel.setGeometry(QRect(10, 100, 121, 24))
         self.savedGroupsLabel.setFont(font)
-        self.layoutWidget2 = QWidget(self.groupTab)
-        self.layoutWidget2.setObjectName(u"layoutWidget2")
-        self.layoutWidget2.setGeometry(QRect(11, 11, 254, 60))
-        self.formLayout = QFormLayout(self.layoutWidget2)
-        self.formLayout.setObjectName(u"formLayout")
-        self.formLayout.setContentsMargins(0, 0, 0, 0)
-        self.groupNameLabel = QLabel(self.layoutWidget2)
+        self.layoutWidget1 = QWidget(self.groupTab)
+        self.layoutWidget1.setObjectName(u"layoutWidget1")
+        self.layoutWidget1.setGeometry(QRect(11, 11, 237, 60))
+        self.groupGridLayout = QGridLayout(self.layoutWidget1)
+        self.groupGridLayout.setObjectName(u"groupGridLayout")
+        self.groupGridLayout.setContentsMargins(0, 0, 0, 0)
+        self.groupNameLabel = QLabel(self.layoutWidget1)
         self.groupNameLabel.setObjectName(u"groupNameLabel")
         self.groupNameLabel.setFont(font)
 
-        self.formLayout.setWidget(0, QFormLayout.LabelRole, self.groupNameLabel)
+        self.groupGridLayout.addWidget(self.groupNameLabel, 0, 0, 1, 1)
 
-        self.groupNameLineEdit = QLineEdit(self.layoutWidget2)
+        self.groupNameLineEdit = QLineEdit(self.layoutWidget1)
         self.groupNameLineEdit.setObjectName(u"groupNameLineEdit")
         self.groupNameLineEdit.setFont(font2)
 
-        self.formLayout.setWidget(0, QFormLayout.FieldRole, self.groupNameLineEdit)
+        self.groupGridLayout.addWidget(self.groupNameLineEdit, 0, 1, 1, 1)
 
-        self.responsiblePersonLabel = QLabel(self.layoutWidget2)
+        self.responsiblePersonLabel = QLabel(self.layoutWidget1)
         self.responsiblePersonLabel.setObjectName(u"responsiblePersonLabel")
         self.responsiblePersonLabel.setFont(font)
 
-        self.formLayout.setWidget(1, QFormLayout.LabelRole, self.responsiblePersonLabel)
+        self.groupGridLayout.addWidget(self.responsiblePersonLabel, 1, 0, 1, 1)
 
-        self.responsiblePersonLineEdit = QLineEdit(self.layoutWidget2)
+        self.responsiblePersonLineEdit = QLineEdit(self.layoutWidget1)
         self.responsiblePersonLineEdit.setObjectName(u"responsiblePersonLineEdit")
         self.responsiblePersonLineEdit.setFont(font2)
 
-        self.formLayout.setWidget(1, QFormLayout.FieldRole, self.responsiblePersonLineEdit)
+        self.groupGridLayout.addWidget(self.responsiblePersonLineEdit, 1, 1, 1, 1)
 
         self.tabWidget.addTab(self.groupTab, "")
         self.reportsTab = QWidget()
@@ -362,7 +374,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.tabWidget.setCurrentIndex(2)
+        self.tabWidget.setCurrentIndex(1)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -387,7 +399,9 @@ class Ui_MainWindow(object):
         self.firstNameLabel.setText(QCoreApplication.translate("MainWindow", u"Etunimi", None))
         self.lastNameLabel.setText(QCoreApplication.translate("MainWindow", u"Sukunimi", None))
         self.groupLabel.setText(QCoreApplication.translate("MainWindow", u"Ryhm\u00e4", None))
-        self.vehicleClassLabel.setText(QCoreApplication.translate("MainWindow", u"Ajoneuvoluokka", None))
+        self.groupComboBox.setCurrentText("")
+        self.vehicleClassLabel.setText(QCoreApplication.translate("MainWindow", u"Ajokorttiluokka", None))
+        self.emailLabel.setText(QCoreApplication.translate("MainWindow", u"S\u00e4hk\u00f6posti", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.studentTab), QCoreApplication.translate("MainWindow", u"Lainaajat", None))
         self.licensePlateNumberLabel.setText(QCoreApplication.translate("MainWindow", u"Rekisterinumero", None))
         self.manufacturerLabel.setText(QCoreApplication.translate("MainWindow", u"Merkki", None))
