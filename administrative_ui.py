@@ -40,10 +40,10 @@ class Ui_MainWindow(object):
         self.tabWidget.setGeometry(QRect(0, 0, 671, 591))
         self.tabWidget.setCursor(QCursor(Qt.CursorShape.ArrowCursor))
         self.tabWidget.setFocusPolicy(Qt.FocusPolicy.TabFocus)
-        self.studentTab = QWidget()
-        self.studentTab.setObjectName(u"studentTab")
-        self.studentTab.setCursor(QCursor(Qt.CursorShape.ArrowCursor))
-        self.registeredPersonsTableWidget = QTableWidget(self.studentTab)
+        self.lenderTab = QWidget()
+        self.lenderTab.setObjectName(u"lenderTab")
+        self.lenderTab.setCursor(QCursor(Qt.CursorShape.ArrowCursor))
+        self.registeredPersonsTableWidget = QTableWidget(self.lenderTab)
         if (self.registeredPersonsTableWidget.columnCount() < 5):
             self.registeredPersonsTableWidget.setColumnCount(5)
         if (self.registeredPersonsTableWidget.rowCount() < 10):
@@ -53,13 +53,13 @@ class Ui_MainWindow(object):
         self.registeredPersonsTableWidget.viewport().setProperty(u"cursor", QCursor(Qt.CursorShape.ForbiddenCursor))
         self.registeredPersonsTableWidget.setRowCount(10)
         self.registeredPersonsTableWidget.setColumnCount(5)
-        self.registeredPersonLabel = QLabel(self.studentTab)
+        self.registeredPersonLabel = QLabel(self.lenderTab)
         self.registeredPersonLabel.setObjectName(u"registeredPersonLabel")
         self.registeredPersonLabel.setGeometry(QRect(10, 210, 141, 16))
         font = QFont()
         font.setPointSize(10)
         self.registeredPersonLabel.setFont(font)
-        self.savePersonPushButton = QPushButton(self.studentTab)
+        self.savePersonPushButton = QPushButton(self.lenderTab)
         self.savePersonPushButton.setObjectName(u"savePersonPushButton")
         self.savePersonPushButton.setGeometry(QRect(270, 173, 75, 25))
         font1 = QFont()
@@ -70,150 +70,150 @@ class Ui_MainWindow(object):
         self.savePersonPushButton.setStyleSheet(u"background-color: rgb(0, 170, 255);\n"
 "color: rgb(255, 255, 255);\n"
 "")
-        self.widget = QWidget(self.studentTab)
-        self.widget.setObjectName(u"widget")
-        self.widget.setGeometry(QRect(10, 11, 244, 188))
-        self.studentGridLayout = QGridLayout(self.widget)
-        self.studentGridLayout.setObjectName(u"studentGridLayout")
-        self.studentGridLayout.setContentsMargins(0, 0, 0, 0)
-        self.ssnLabel = QLabel(self.widget)
+        self.layoutWidget = QWidget(self.lenderTab)
+        self.layoutWidget.setObjectName(u"layoutWidget")
+        self.layoutWidget.setGeometry(QRect(10, 11, 244, 188))
+        self.lenderGridLayout = QGridLayout(self.layoutWidget)
+        self.lenderGridLayout.setObjectName(u"lenderGridLayout")
+        self.lenderGridLayout.setContentsMargins(0, 0, 0, 0)
+        self.ssnLabel = QLabel(self.layoutWidget)
         self.ssnLabel.setObjectName(u"ssnLabel")
         self.ssnLabel.setFont(font)
 
-        self.studentGridLayout.addWidget(self.ssnLabel, 0, 0, 1, 1)
+        self.lenderGridLayout.addWidget(self.ssnLabel, 0, 0, 1, 1)
 
-        self.ssnLineEdit = QLineEdit(self.widget)
+        self.ssnLineEdit = QLineEdit(self.layoutWidget)
         self.ssnLineEdit.setObjectName(u"ssnLineEdit")
         font2 = QFont()
         font2.setPointSize(11)
         self.ssnLineEdit.setFont(font2)
 
-        self.studentGridLayout.addWidget(self.ssnLineEdit, 0, 1, 1, 1)
+        self.lenderGridLayout.addWidget(self.ssnLineEdit, 0, 1, 1, 1)
 
-        self.firstNameLabel = QLabel(self.widget)
+        self.firstNameLabel = QLabel(self.layoutWidget)
         self.firstNameLabel.setObjectName(u"firstNameLabel")
         self.firstNameLabel.setFont(font)
 
-        self.studentGridLayout.addWidget(self.firstNameLabel, 1, 0, 1, 1)
+        self.lenderGridLayout.addWidget(self.firstNameLabel, 1, 0, 1, 1)
 
-        self.firstNameLineEdit = QLineEdit(self.widget)
+        self.firstNameLineEdit = QLineEdit(self.layoutWidget)
         self.firstNameLineEdit.setObjectName(u"firstNameLineEdit")
         self.firstNameLineEdit.setFont(font2)
 
-        self.studentGridLayout.addWidget(self.firstNameLineEdit, 1, 1, 1, 1)
+        self.lenderGridLayout.addWidget(self.firstNameLineEdit, 1, 1, 1, 1)
 
-        self.lastNameLabel = QLabel(self.widget)
+        self.lastNameLabel = QLabel(self.layoutWidget)
         self.lastNameLabel.setObjectName(u"lastNameLabel")
         self.lastNameLabel.setFont(font)
 
-        self.studentGridLayout.addWidget(self.lastNameLabel, 2, 0, 1, 1)
+        self.lenderGridLayout.addWidget(self.lastNameLabel, 2, 0, 1, 1)
 
-        self.lastNameLineEdit = QLineEdit(self.widget)
+        self.lastNameLineEdit = QLineEdit(self.layoutWidget)
         self.lastNameLineEdit.setObjectName(u"lastNameLineEdit")
         self.lastNameLineEdit.setFont(font2)
 
-        self.studentGridLayout.addWidget(self.lastNameLineEdit, 2, 1, 1, 1)
+        self.lenderGridLayout.addWidget(self.lastNameLineEdit, 2, 1, 1, 1)
 
-        self.groupLabel = QLabel(self.widget)
+        self.groupLabel = QLabel(self.layoutWidget)
         self.groupLabel.setObjectName(u"groupLabel")
         self.groupLabel.setFont(font)
 
-        self.studentGridLayout.addWidget(self.groupLabel, 3, 0, 1, 1)
+        self.lenderGridLayout.addWidget(self.groupLabel, 3, 0, 1, 1)
 
-        self.groupComboBox = QComboBox(self.widget)
+        self.groupComboBox = QComboBox(self.layoutWidget)
         self.groupComboBox.setObjectName(u"groupComboBox")
         self.groupComboBox.setFont(font2)
 
-        self.studentGridLayout.addWidget(self.groupComboBox, 3, 1, 1, 1)
+        self.lenderGridLayout.addWidget(self.groupComboBox, 3, 1, 1, 1)
 
-        self.vehicleClassLabel = QLabel(self.widget)
+        self.vehicleClassLabel = QLabel(self.layoutWidget)
         self.vehicleClassLabel.setObjectName(u"vehicleClassLabel")
         self.vehicleClassLabel.setFont(font)
 
-        self.studentGridLayout.addWidget(self.vehicleClassLabel, 4, 0, 1, 1)
+        self.lenderGridLayout.addWidget(self.vehicleClassLabel, 4, 0, 1, 1)
 
-        self.vehicleClassLineEdit = QLineEdit(self.widget)
+        self.vehicleClassLineEdit = QLineEdit(self.layoutWidget)
         self.vehicleClassLineEdit.setObjectName(u"vehicleClassLineEdit")
         self.vehicleClassLineEdit.setFont(font2)
 
-        self.studentGridLayout.addWidget(self.vehicleClassLineEdit, 4, 1, 1, 1)
+        self.lenderGridLayout.addWidget(self.vehicleClassLineEdit, 4, 1, 1, 1)
 
-        self.emailLabel = QLabel(self.widget)
+        self.emailLabel = QLabel(self.layoutWidget)
         self.emailLabel.setObjectName(u"emailLabel")
         self.emailLabel.setFont(font)
 
-        self.studentGridLayout.addWidget(self.emailLabel, 5, 0, 1, 1)
+        self.lenderGridLayout.addWidget(self.emailLabel, 5, 0, 1, 1)
 
-        self.emailLineEdit = QLineEdit(self.widget)
+        self.emailLineEdit = QLineEdit(self.layoutWidget)
         self.emailLineEdit.setObjectName(u"emailLineEdit")
         self.emailLineEdit.setFont(font2)
 
-        self.studentGridLayout.addWidget(self.emailLineEdit, 5, 1, 1, 1)
+        self.lenderGridLayout.addWidget(self.emailLineEdit, 5, 1, 1, 1)
 
-        self.tabWidget.addTab(self.studentTab, "")
+        self.tabWidget.addTab(self.lenderTab, "")
         self.vehicleTab = QWidget()
         self.vehicleTab.setObjectName(u"vehicleTab")
-        self.layoutWidget = QWidget(self.vehicleTab)
-        self.layoutWidget.setObjectName(u"layoutWidget")
-        self.layoutWidget.setGeometry(QRect(10, 10, 252, 156))
-        self.vehicleGridLayout = QGridLayout(self.layoutWidget)
+        self.layoutWidget1 = QWidget(self.vehicleTab)
+        self.layoutWidget1.setObjectName(u"layoutWidget1")
+        self.layoutWidget1.setGeometry(QRect(10, 10, 252, 156))
+        self.vehicleGridLayout = QGridLayout(self.layoutWidget1)
         self.vehicleGridLayout.setObjectName(u"vehicleGridLayout")
         self.vehicleGridLayout.setContentsMargins(0, 0, 0, 0)
-        self.licensePlateNumberLabel = QLabel(self.layoutWidget)
+        self.licensePlateNumberLabel = QLabel(self.layoutWidget1)
         self.licensePlateNumberLabel.setObjectName(u"licensePlateNumberLabel")
         self.licensePlateNumberLabel.setFont(font)
 
         self.vehicleGridLayout.addWidget(self.licensePlateNumberLabel, 0, 0, 1, 1)
 
-        self.licensePlateNumberLineEdit = QLineEdit(self.layoutWidget)
+        self.licensePlateNumberLineEdit = QLineEdit(self.layoutWidget1)
         self.licensePlateNumberLineEdit.setObjectName(u"licensePlateNumberLineEdit")
         self.licensePlateNumberLineEdit.setFont(font2)
 
         self.vehicleGridLayout.addWidget(self.licensePlateNumberLineEdit, 0, 1, 1, 1)
 
-        self.manufacturerLabel = QLabel(self.layoutWidget)
+        self.manufacturerLabel = QLabel(self.layoutWidget1)
         self.manufacturerLabel.setObjectName(u"manufacturerLabel")
         self.manufacturerLabel.setFont(font)
 
         self.vehicleGridLayout.addWidget(self.manufacturerLabel, 1, 0, 1, 1)
 
-        self.manufacturerLineEdit = QLineEdit(self.layoutWidget)
+        self.manufacturerLineEdit = QLineEdit(self.layoutWidget1)
         self.manufacturerLineEdit.setObjectName(u"manufacturerLineEdit")
         self.manufacturerLineEdit.setFont(font2)
 
         self.vehicleGridLayout.addWidget(self.manufacturerLineEdit, 1, 1, 1, 1)
 
-        self.modelLabel = QLabel(self.layoutWidget)
+        self.modelLabel = QLabel(self.layoutWidget1)
         self.modelLabel.setObjectName(u"modelLabel")
         self.modelLabel.setFont(font)
 
         self.vehicleGridLayout.addWidget(self.modelLabel, 2, 0, 1, 1)
 
-        self.modelLineEdit = QLineEdit(self.layoutWidget)
+        self.modelLineEdit = QLineEdit(self.layoutWidget1)
         self.modelLineEdit.setObjectName(u"modelLineEdit")
         self.modelLineEdit.setFont(font2)
 
         self.vehicleGridLayout.addWidget(self.modelLineEdit, 2, 1, 1, 1)
 
-        self.modelYearLabel = QLabel(self.layoutWidget)
+        self.modelYearLabel = QLabel(self.layoutWidget1)
         self.modelYearLabel.setObjectName(u"modelYearLabel")
         self.modelYearLabel.setFont(font)
 
         self.vehicleGridLayout.addWidget(self.modelYearLabel, 3, 0, 1, 1)
 
-        self.modelYearLineEdit = QLineEdit(self.layoutWidget)
+        self.modelYearLineEdit = QLineEdit(self.layoutWidget1)
         self.modelYearLineEdit.setObjectName(u"modelYearLineEdit")
         self.modelYearLineEdit.setFont(font2)
 
         self.vehicleGridLayout.addWidget(self.modelYearLineEdit, 3, 1, 1, 1)
 
-        self.capacityLabel = QLabel(self.layoutWidget)
+        self.capacityLabel = QLabel(self.layoutWidget1)
         self.capacityLabel.setObjectName(u"capacityLabel")
         self.capacityLabel.setFont(font)
 
         self.vehicleGridLayout.addWidget(self.capacityLabel, 4, 0, 1, 1)
 
-        self.capacityLineEdit = QLineEdit(self.layoutWidget)
+        self.capacityLineEdit = QLineEdit(self.layoutWidget1)
         self.capacityLineEdit.setObjectName(u"capacityLineEdit")
         self.capacityLineEdit.setFont(font2)
 
@@ -274,31 +274,31 @@ class Ui_MainWindow(object):
         self.savedGroupsLabel.setObjectName(u"savedGroupsLabel")
         self.savedGroupsLabel.setGeometry(QRect(10, 100, 121, 24))
         self.savedGroupsLabel.setFont(font)
-        self.layoutWidget1 = QWidget(self.groupTab)
-        self.layoutWidget1.setObjectName(u"layoutWidget1")
-        self.layoutWidget1.setGeometry(QRect(11, 11, 237, 60))
-        self.groupGridLayout = QGridLayout(self.layoutWidget1)
+        self.layoutWidget2 = QWidget(self.groupTab)
+        self.layoutWidget2.setObjectName(u"layoutWidget2")
+        self.layoutWidget2.setGeometry(QRect(11, 11, 237, 60))
+        self.groupGridLayout = QGridLayout(self.layoutWidget2)
         self.groupGridLayout.setObjectName(u"groupGridLayout")
         self.groupGridLayout.setContentsMargins(0, 0, 0, 0)
-        self.groupNameLabel = QLabel(self.layoutWidget1)
+        self.groupNameLabel = QLabel(self.layoutWidget2)
         self.groupNameLabel.setObjectName(u"groupNameLabel")
         self.groupNameLabel.setFont(font)
 
         self.groupGridLayout.addWidget(self.groupNameLabel, 0, 0, 1, 1)
 
-        self.groupNameLineEdit = QLineEdit(self.layoutWidget1)
+        self.groupNameLineEdit = QLineEdit(self.layoutWidget2)
         self.groupNameLineEdit.setObjectName(u"groupNameLineEdit")
         self.groupNameLineEdit.setFont(font2)
 
         self.groupGridLayout.addWidget(self.groupNameLineEdit, 0, 1, 1, 1)
 
-        self.responsiblePersonLabel = QLabel(self.layoutWidget1)
+        self.responsiblePersonLabel = QLabel(self.layoutWidget2)
         self.responsiblePersonLabel.setObjectName(u"responsiblePersonLabel")
         self.responsiblePersonLabel.setFont(font)
 
         self.groupGridLayout.addWidget(self.responsiblePersonLabel, 1, 0, 1, 1)
 
-        self.responsiblePersonLineEdit = QLineEdit(self.layoutWidget1)
+        self.responsiblePersonLineEdit = QLineEdit(self.layoutWidget2)
         self.responsiblePersonLineEdit.setObjectName(u"responsiblePersonLineEdit")
         self.responsiblePersonLineEdit.setFont(font2)
 
@@ -374,7 +374,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(3)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -402,7 +402,7 @@ class Ui_MainWindow(object):
         self.groupComboBox.setCurrentText("")
         self.vehicleClassLabel.setText(QCoreApplication.translate("MainWindow", u"Ajokorttiluokka", None))
         self.emailLabel.setText(QCoreApplication.translate("MainWindow", u"S\u00e4hk\u00f6posti", None))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.studentTab), QCoreApplication.translate("MainWindow", u"Lainaajat", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.lenderTab), QCoreApplication.translate("MainWindow", u"Lainaajat", None))
         self.licensePlateNumberLabel.setText(QCoreApplication.translate("MainWindow", u"Rekisterinumero", None))
         self.manufacturerLabel.setText(QCoreApplication.translate("MainWindow", u"Merkki", None))
         self.modelLabel.setText(QCoreApplication.translate("MainWindow", u"Malli", None))

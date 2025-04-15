@@ -38,12 +38,14 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # Kutsutaan käyttöliittymän muodostusmetodia setupUi
         self.ui.setupUi(self)
 
+        # Päivitetään yhdistelmäruutujen arvot ohjelman käynnistyksen yhteydessä
+        self.updateCombos()
+
         # Rutiini, joka lukee asetukset, jos ne ovat olemassa
         try:
             # Avataan asetustiedosto ja muutetaan se Python sanakirjaksi
             with open('settings.json', 'rt') as settingsFile: # With sulkee tiedoston automaattisesti
                 
-                # TODO: Mieti kannattaako muuttaa json.load(settingsFile)-komennoksi
                 jsonData = settingsFile.read()
                 self.currentSettings = json.loads(jsonData)
             
@@ -63,6 +65,11 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # Valikkotoiminnot
         self.ui.actionMuokkaa.triggered.connect(self.openSettingsDialog)
         self.ui.actionTietoja_ohjelmasta.triggered.connect(self.openAboutDialog)
+
+        # Välilehtien vaihdon käynnistämät signaalit
+
+        # Kun välilehteä vaihdetaan, päivitetään yhdistelmäruutujen valinnat
+        self.ui.tabWidget.currentChanged.connect(self.updateCombos)
 
         # Painikkeet
         self.ui.saveGroupPushButton.clicked.connect(self.saveGroup)
@@ -95,6 +102,25 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.aboutDialog.setWindowTitle('Tietoja ohjelmasta')
         self.aboutDialog.exec() # Luodaan dialogi event loop
 
+    # Välilehtien slotit
+    # ------------------
+
+    def updateCombos(self):
+
+        # Luetaan tietokanta-asetukset paikallisiin muuttujiin
+        dbSettings = self.currentSettings
+        plainTextPassword = self.plainTextPassword
+        dbSettings['password'] = plainTextPassword # Vaihdetaan salasana selväkieliseksi
+
+        # Luodaan tietokantayhteys-olio
+        dbConnection = dbOperations.DbConnection(dbSettings)
+
+        # Tehdään lista ryhmät-yhdistelmäruudun arvoista
+        groupList = dbConnection.readColumnsFromTable('ryhma', ['ryhma'])
+
+        # TODO: Päivitetään elementin arvot
+        self.ui.groupComboBox.addItem()
+
     # Painikkeiden slotit
     # -------------------
 
@@ -103,7 +129,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # Määritellään tietokanta-asetukset
         dbSettings = self.currentSettings
         plainTextPassword = self.plainTextPassword
-        dbSettings['password'] = plainTextPassword
+        dbSettings['password'] = plainTextPassword # Vaihdetaan salasana selväkieliseksi
 
         # Määritellään tallennusmetodin vaatimat parametrit
         tableName = 'ryhma'

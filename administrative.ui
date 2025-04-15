@@ -33,9 +33,9 @@
      <enum>Qt::FocusPolicy::TabFocus</enum>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>3</number>
     </property>
-    <widget class="QWidget" name="studentTab">
+    <widget class="QWidget" name="lenderTab">
      <property name="cursor">
       <cursorShape>ArrowCursor</cursorShape>
      </property>
@@ -121,7 +121,7 @@ color: rgb(255, 255, 255);
        <string>Tallenna</string>
       </property>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -130,7 +130,7 @@ color: rgb(255, 255, 255);
         <height>188</height>
        </rect>
       </property>
-      <layout class="QGridLayout" name="studentGridLayout">
+      <layout class="QGridLayout" name="lenderGridLayout">
        <item row="0" column="0">
         <widget class="QLabel" name="ssnLabel">
          <property name="font">
