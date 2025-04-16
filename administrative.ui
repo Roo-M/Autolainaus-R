@@ -33,7 +33,7 @@
      <enum>Qt::FocusPolicy::TabFocus</enum>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="lenderTab">
      <property name="cursor">
@@ -47,7 +47,7 @@
        <rect>
         <x>10</x>
         <y>230</y>
-        <width>541</width>
+        <width>641</width>
         <height>321</height>
        </rect>
       </property>
@@ -58,7 +58,7 @@
        <number>10</number>
       </property>
       <property name="columnCount">
-       <number>5</number>
+       <number>6</number>
       </property>
       <row/>
       <row/>
@@ -70,6 +70,7 @@
       <row/>
       <row/>
       <row/>
+      <column/>
       <column/>
       <column/>
       <column/>

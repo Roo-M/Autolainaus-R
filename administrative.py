@@ -38,9 +38,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # Kutsutaan käyttöliittymän muodostusmetodia setupUi
         self.ui.setupUi(self)
 
-        # Päivitetään yhdistelmäruutujen arvot ohjelman käynnistyksen yhteydessä
-        self.updateCombos()
-
         # Rutiini, joka lukee asetukset, jos ne ovat olemassa
         try:
             # Avataan asetustiedosto ja muutetaan se Python sanakirjaksi
@@ -54,9 +51,15 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             
             # Huom! Salasana pitää tallentaa JSON-tiedostoon tavallisena merkkijonona,
             # ei byte string muodossa. Salauskirjaston decode ja encode metodit hoitavat asian
+
+            # Päivitetään käyttöliittymäelementtien tiedot tietokannasta
+            self.refreshUi()
+
             
         except Exception as e:
             self.openSettingsDialog()
+
+        # FIXME: poista kaikki print kun valmis
 
 
         # OHJELMOIDUT SIGNAALIT
@@ -102,9 +105,19 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.aboutDialog.setWindowTitle('Tietoja ohjelmasta')
         self.aboutDialog.exec() # Luodaan dialogi event loop
 
+
+    # Yleinen käyttöliittymän verestys (refresh)
+    def refreshUi(self):
+        self.updateCombos() # Ryhmän valinta yhdistelmäruudun arvot
+        self.updateLenderTableWidget() # Lainaajien tiedot
+        self.updateVehicleTableWidget() # Autojen tiedot
+        self.updateGroupTableWidget() # Ryhmien tiedot
+
+
     # Välilehtien slotit
     # ------------------
 
+    # Ryhmän valinta -ruudun arvojen päivitys
     def updateCombos(self):
 
         # Luetaan tietokanta-asetukset paikallisiin muuttujiin
@@ -118,8 +131,102 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # Tehdään lista ryhmät-yhdistelmäruudun arvoista
         groupList = dbConnection.readColumnsFromTable('ryhma', ['ryhma'])
 
-        # TODO: Päivitetään elementin arvot
-        self.ui.groupComboBox.addItem()
+        groupStringList = []
+        for item in groupList:
+            stringValue = str(item[0])
+            groupStringList.append(stringValue)
+
+        self.ui.groupComboBox.clear()
+        self.ui.groupComboBox.addItems(groupStringList)
+
+    # Lainaajat-taulukon päivitys
+    def updateLenderTableWidget(self):
+        # Luetaan tietokanta-asetukset paikallisiin muuttujiin
+        dbSettings = self.currentSettings
+        plainTextPassword = self.plainTextPassword
+        dbSettings['password'] = plainTextPassword # Vaihdetaan salasana selväkieliseksi
+
+        # Luodaan tietokantayhteys-olio
+        dbConnection = dbOperations.DbConnection(dbSettings)
+
+        # Tehdään lista lainaaja -taulun tiedoista
+        tableData = dbConnection.readAllColumnsFromTable('lainaajat')
+
+        print('Lainaajataulun tiedot: ', tableData)
+
+        # Määritellään taulukkoelementin otsikot
+        headerRow = ['Henkilötunnus', 'Etunimi', 'Sukunimi', 'Ryhmä', 'Ajokorttiluokka', 'Sähköposti']
+        self.ui.registeredPersonsTableWidget.setHorizontalHeaderLabels(headerRow)
+
+        # Asetetaan taulukon solujen arvot
+        for row in range(len(tableData)): # Luetaan listaa riveittäin
+            for column in range(len(tableData[row])): # Luetaan monikkoa sarakkeittain
+
+                # Muutetaan merkkijonoksi ja QTableWidgetItem-olioksi
+                data = QtWidgets.QTableWidgetItem(str(tableData[row][column]))
+
+                print(data)
+                self.ui.registeredPersonsTableWidget.setItem(row, column, data)
+
+    # Autot-taulukon päivitys
+    def updateVehicleTableWidget(self):
+        # Luetaan tietokanta-asetukset paikallisiin muuttujiin
+        dbSettings = self.currentSettings
+        plainTextPassword = self.plainTextPassword
+        dbSettings['password'] = plainTextPassword # Vaihdetaan salasana selväkieliseksi
+
+        # Luodaan tietokantayhteys-olio
+        dbConnection = dbOperations.DbConnection(dbSettings)
+
+        # Tehdään lista auto -taulun tiedoista
+        tableData = dbConnection.readAllColumnsFromTable('auto')
+
+        print('Autotaulun tiedot: ', tableData)
+
+        # Määritellään taulukkoelementin otsikot
+        headerRow = ['Rekisterinumero', 'Merkki', 'Malli', 'Vuosimalli', 'Henkilömäärä']
+        self.ui.vehicleCatalogTableWidget.setHorizontalHeaderLabels(headerRow)
+
+        # Asetetaan taulukon solujen arvot
+        for row in range(len(tableData)): # Luetaan listaa riveittäin
+            for column in range(len(tableData[row])): # Luetaan monikkoa sarakkeittain
+
+                # Muutetaan merkkijonoksi ja QTableWidgetItem-olioksi
+                data = QtWidgets.QTableWidgetItem(str(tableData[row][column]))
+
+                print(data)
+                self.ui.vehicleCatalogTableWidget.setItem(row, column, data)
+
+    # Ryhmät -taulukon päivitys
+    def updateGroupTableWidget(self):
+        # Luetaan tietokanta-asetukset paikallisiin muuttujiin
+        dbSettings = self.currentSettings
+        plainTextPassword = self.plainTextPassword
+        dbSettings['password'] = plainTextPassword # Vaihdetaan salasana selväkieliseksi
+
+        # Luodaan tietokantayhteys-olio
+        dbConnection = dbOperations.DbConnection(dbSettings)
+
+        # Tehdään lista ryhma -taulun tiedoista
+        tableData = dbConnection.readAllColumnsFromTable('ryhma')
+
+        print('Ryhmätaulun tiedot: ', tableData)
+
+        # Määritellään taulukkoelementin otsikot
+        headerRow = ['Ryhmän nimi', 'Vastuuhenkilö']
+        self.ui.savedGroupsTableWidget.setHorizontalHeaderLabels(headerRow)
+
+        # Asetetaan taulukon solujen arvot
+        for row in range(len(tableData)): # Luetaan listaa riveittäin
+            for column in range(len(tableData[row])): # Luetaan monikkoa sarakkeittain
+
+                # Muutetaan merkkijonoksi ja QTableWidgetItem-olioksi
+                data = QtWidgets.QTableWidgetItem(str(tableData[row][column]))
+
+                print(data)
+                self.ui.savedGroupsTableWidget.setItem(row, column, data)
+
+
 
     # Painikkeiden slotit
     # -------------------
@@ -146,6 +253,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # Kutsutaan tallennusmetodia
         try:
             dbConnection.addToTable(tableName, groupDictionary)
+            self.updateGroupTableWidget()
         except Exception as e:
             print('Virheilmoitus', str(e))
             self.openWarning('Tallennus ei onnistunut.', str(e))
@@ -162,10 +270,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         ssn = self.ui.ssnLineEdit.text()
         firstName = self.ui.firstNameLineEdit
         lastName = self.ui.lastNameLineEdit.text()
-        # Asetetaan ryhmä tilapäisesti:
-        self.ui.groupComboBox.setCurrentText('Ei määritelty')
-
-        # TODO: Lisää tähän koodi, jolla haetaan ryhmät yhdistelmäruutuun
         group = self.ui.groupComboBox.currentText()
         vehicleClass = self.ui.vehicleClassLineEdit.text()
         email = self.ui.emailLineEdit.text()
@@ -184,11 +288,11 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # Kutsutaan tallennusmetodia
         try:
             dbConnection.addToTable(tableName, lenderDictionary)
+            self.updateLenderTableWidget()
+            
         except Exception as e:
-            print('Virheilmoitus', str(e))
             self.openWarning('Tallennus ei onnistunut.', str(e))
     
-
 
     # Ajoneuvon tallennus
     def saveVehicle(self):
@@ -219,10 +323,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # Kutsutaan tallennusmetodia
         try:
             dbConnection.addToTable(tableName, vehicleDictionary)
+            self.updateVehicleTableWidget()
         except Exception as e:
-            print('Virheilmoitus', str(e))
             self.openWarning('Tallennus ei onnistunut.', str(e))
-
 
 
     # Virheilmoitukset ja muut Message Box -dialogit
@@ -245,6 +348,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         msgBox.exec()
 
 # Asetusten tallennusikkunan luokka
+# ---------------------------------
 class SaveSettingsDialog(QtWidgets.QDialog, Settings_Dialog):
     """A class for creating objects to open settings dialog window"""
 
@@ -338,6 +442,8 @@ class SaveSettingsDialog(QtWidgets.QDialog, Settings_Dialog):
         msgBox.setStandardButtons(QtWidgets.QMessageBox.Ok)
         msgBox.exec() # Luodaan Msg Box:lle oma event loop
 
+# Tietoja ohjelmasta ikkunan luokka
+# ---------------------------------
 class AboutDialog(QtWidgets.QDialog, About_Dialog):
     """A class to show About dialog."""
     def __init__(self):
